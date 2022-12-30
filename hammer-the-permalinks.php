@@ -25,12 +25,17 @@ function flush_rewrite_rules_on_404() {
 		
 		//Get the Home URL
 		$siteHomeUrl= get_home_url();
+	    
+	    	//Get the site Admin Email
+	   	$adminEmail = get_bloginfo('admin_email');
 		
 		//Resave Permalinks / Flush Rewrite Rules
         	flush_rewrite_rules();
 		
 		//Error log that the workaround has been triggered, and include the 404'd URL 
 		error_log('Internal Page 404 Error encountered, flush_rewrite_rules action triggered for url:'. $requested_url );
+	    
+	    	wp_mail( $adminEmail , $siteHomeUrl . ' has encounterned an Internal 404 Error' , $requested_url . ' on ' . $siteHomeUrl . ' triggered the workaround in place. Please visit internal pages and confirm working');
 		
 
     }
