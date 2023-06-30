@@ -1,6 +1,6 @@
 <?php
 /**
-* Plugin Name: PermaHammer
+* Plugin Name:  Freshy PermaHammer
 * Plugin URI: https://github.com/FreshyMichael/PermaHammer/
 * Description: Pesky permalink errors be gone - automtically resaves permalinks on end user 404
 * Version: 1.0.0
