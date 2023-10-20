@@ -1,8 +1,8 @@
 <?php
 /**
-* Plugin Name:  Freshy PermaHammer
+* Plugin Name: PermaHammer
 * Plugin URI: https://github.com/FreshyMichael/PermaHammer/
-* Description: Pesky permalink errors be gone - automtically resaves permalinks on end user 404
+* Description: Pesky permalink errors be gone - automatically re-saves permalinks on end-user 404
 * Version: 1.0.0
 * Author: FreshySites
 * Author URI: https://freshysites.com/
