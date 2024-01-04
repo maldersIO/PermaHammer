@@ -5,7 +5,7 @@ Tags: permalinks
 Requires at least: 6.3.2
 Tested up to: 6.4.2
 Requires PHP: 5.6
-Stable tag: 6.4.2
+Stable tag: 1.0.0
 License: GPLv3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
