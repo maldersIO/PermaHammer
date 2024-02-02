@@ -16,12 +16,12 @@ if (!defined('ABSPATH')) {
 /* PermaHammer Start */
 //______________________________________________________________________________
 
-add_action('template_redirect', 'permaHammer_flush_rewrite_rules_on_404');
+add_action('template_redirect', 'frsh_permaHammer_flush_rewrite_rules_on_404');
 
-function permaHammer_flush_rewrite_rules_on_404() {
+function frsh_permaHammer_flush_rewrite_rules_on_404() {
     if (is_404()) {
         // Get The URL of the 404 page
-        $requested_url = esc_url((isset($_SERVER['HTTPS']) ? "https" : "http") . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
+        $requested_url = isset($_SERVER['HTTPS']) ? "https" : "http" . esc_url("://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
 
         // Get the Home URL
         $siteHomeUrl = get_home_url();
