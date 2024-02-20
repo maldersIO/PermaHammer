@@ -1,11 +1,11 @@
 <?php
 /**
 * Plugin Name: PermaHammer
-* Plugin URI: https://github.com/FreshyMichael/PermaHammer/
+* Plugin URI: https://github.com/maldersIO/PermaHammer/
 * Description: Pesky permalink errors be gone - automatically re-saves permalinks on end-user 404
 * Version: 1.0.0
-* Author: FreshySites
-* Author URI: https://freshysites.com/
+* Author: maldersIO
+* Author URI: https://malders.io/
 * License: GNU v3.0
 */
 
@@ -16,13 +16,12 @@ if (!defined('ABSPATH')) {
 /* PermaHammer Start */
 //______________________________________________________________________________
 
-add_action('template_redirect', 'frsh_permaHammer_flush_rewrite_rules_on_404');
+add_action('template_redirect', 'mldrs_permaHammer_flush_rewrite_rules_on_404');
 
-function frsh_permaHammer_flush_rewrite_rules_on_404() {
+function mldrs_permaHammer_flush_rewrite_rules_on_404() {
     if (is_404()) {
         // Get The URL of the 404 page
         $requested_url = isset($_SERVER['HTTPS']) ? "https" : "http" . esc_url("://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
-
         // Get the Home URL
         $siteHomeUrl = get_home_url();
 
