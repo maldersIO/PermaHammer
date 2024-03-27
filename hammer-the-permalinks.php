@@ -10,7 +10,7 @@
 */
 
 if (!defined('ABSPATH')) {
-    die();
+    exit; // Exit if accessed directly
 }
 
 /* PermaHammer Start */
@@ -20,20 +20,25 @@ add_action('template_redirect', 'mldrs_permaHammer_flush_rewrite_rules_on_404');
 
 function mldrs_permaHammer_flush_rewrite_rules_on_404() {
     if (is_404()) {
-        // Get The URL of the 404 page
-        $requested_url = isset($_SERVER['HTTPS']) ? "https" : "http" . esc_url("://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
-        // Get the Home URL
-        $siteHomeUrl = get_home_url();
+        // Sanitize HTTPS check
+        $req_scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
 
-        // Get the site Admin Email
-        $adminEmail = get_bloginfo('admin_email');
+        // Sanitize and escape URL components
+        $requested_url = esc_url_raw($req_scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+
+        // Validate email and escape admin email
+        $admin_email = is_email(get_option('admin_email')) ? get_option('admin_email') : '';
+
+        // Sanitize and escape home URL
+        $site_home_url = esc_url(get_home_url());
 
         // Resave Permalinks / Flush Rewrite Rules
         flush_rewrite_rules();
 
         // Error log that the workaround has been triggered, and include the 404'd URL
-        error_log('Internal Page 404 Error encountered, flush_rewrite_rules action triggered for url:' . $requested_url);
+        error_log('Internal Page 404 Error encountered, flush_rewrite_rules action triggered for URL: ' . esc_url($requested_url));
 
-        wp_mail($adminEmail, $siteHomeUrl . ' has encountered an Internal 404 Error', $requested_url . ' on ' . $siteHomeUrl . ' triggered the workaround in place. Please visit internal pages and confirm working');
+        // Send email notification to admin
+        wp_mail($admin_email, esc_html($site_home_url) . ' has encountered an Internal 404 Error', esc_url($requested_url) . ' on ' . esc_html($site_home_url) . ' triggered the workaround in place. Please visit internal pages and confirm working');
     }
 }
