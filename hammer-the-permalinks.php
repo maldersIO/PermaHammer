@@ -24,7 +24,7 @@ function mldrs_permaHammer_flush_rewrite_rules_on_404() {
         $req_scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
 
         // Sanitize and escape URL components
-        $requested_url = esc_url_raw($req_scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        $requested_url = esc_url($req_scheme . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
 
         // Validate email and escape admin email
         $admin_email = is_email(get_option('admin_email')) ? get_option('admin_email') : '';
